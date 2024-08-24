@@ -1,27 +1,47 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const humanChoice = getHumanChoice();
+const computerChoice = getComputerChoice();
+
+playRound(humanChoice, computerChoice);
+
 function playRound(humanChoice, computerChoice) {
     //if it's a tie, no logic needed
     if (humanChoice === computerChoice) {
         console.log("Tie!");
         console.log(`Current scores are: You: ${humanScore} Computer: ${computerScore}`);
-        return;
     }
 
     //check to see who won
     if (humanChoice === "rock") {
-        
+        if (computerChoice === "scissors") {
+            roundWin(humanChoice, computerChoice);
+        } else if (computerChoice === "paper") {
+            roundLoss(humanChoice, computerChoice);
+        }
+    } else if (humanChoice === "paper") {
+        if (computerChoice === "rock") {
+            roundWin(humanChoice, computerChoice);
+        } else if (computerChoice === "scissors") {
+            roundLoss(humanChoice, computerChoice);
+        }
+    } else if (humanChoice === "scissors") {
+        if (computerChoice === "paper") {
+            roundWin(humanChoice, computerChoice);
+        } else if (computerChoice === "rock") {
+            roundLoss(humanChoice, computerChoice);
+        }
     }
 }
 
-function roundWin() {
-    console.log("You win!");
+function roundWin(humanChoice, computerChoice) {
+    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
     console.log(`Current scores are: You: ${++humanScore} Computer: ${computerScore}`);
 }
 
-function roundLoss() {
-    console.log("You lose :(");
+function roundLoss(humanChoice, computerChoice) {
+    console.log(`You lose :( ${computerChoice} beats ${humanChoice}`);
     console.log(`Current scores are: You: ${humanScore} Computer: ${++computerScore}`);
 }
 
