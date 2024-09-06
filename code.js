@@ -1,49 +1,70 @@
-let humanScore = 0;
-let computerScore = 0;
+playGame();
 
-const humanChoice = getHumanChoice();
-const computerChoice = getComputerChoice();
+function playGame() {
+    
+    let humanScore = 0;
+    let computerScore = 0;
+    
+    //play 5 rounds of the game
+    for (let i = 0; i < 5; i++) {
+        const humanChoice = getHumanChoice();
+        const computerChoice = getComputerChoice();
 
-playRound(humanChoice, computerChoice);
-
-function playRound(humanChoice, computerChoice) {
-    //if it's a tie, no logic needed
-    if (humanChoice === computerChoice) {
-        console.log("Tie!");
-        console.log(`Current scores are: You: ${humanScore} Computer: ${computerScore}`);
+        playRound(humanChoice, computerChoice);
     }
 
-    //check to see who won
-    if (humanChoice === "rock") {
-        if (computerChoice === "scissors") {
-            roundWin(humanChoice, computerChoice);
-        } else if (computerChoice === "paper") {
-            roundLoss(humanChoice, computerChoice);
+    //after 5 rounds, print final scores
+    if (humanScore > computerScore) {
+        console.log(`You win the game! Final scores: You: ${humanScore} Computer: ${computerScore}`);
+    } else if (humanScore < computerScore) {
+        console.log(`You lose the game :( Final scores: You: ${humanScore} Computer: ${computerScore}`);
+    } else {
+        console.log(`The game ended in a tie. Final scores: You: ${humanScore} Computer: ${computerScore}`);
+    }
+    
+    function playRound(humanChoice, computerChoice) {
+
+        //if it's a tie, no logic needed
+        if (humanChoice === computerChoice) {
+            console.log("Tie!");
+            console.log(`Current scores are: You: ${humanScore} Computer: ${computerScore}`);
+            return;
         }
-    } else if (humanChoice === "paper") {
-        if (computerChoice === "rock") {
-            roundWin(humanChoice, computerChoice);
-        } else if (computerChoice === "scissors") {
-            roundLoss(humanChoice, computerChoice);
+    
+        //check to see who won
+        if (humanChoice === "rock") {
+            if (computerChoice === "scissors") {
+                roundWin(humanChoice, computerChoice);
+            } else if (computerChoice === "paper") {
+                roundLoss(humanChoice, computerChoice);
+            }
+        } else if (humanChoice === "paper") {
+            if (computerChoice === "rock") {
+                roundWin(humanChoice, computerChoice);
+            } else if (computerChoice === "scissors") {
+                roundLoss(humanChoice, computerChoice);
+            }
+        } else if (humanChoice === "scissors") {
+            if (computerChoice === "paper") {
+                roundWin(humanChoice, computerChoice);
+            } else if (computerChoice === "rock") {
+                roundLoss(humanChoice, computerChoice);
+            }
         }
-    } else if (humanChoice === "scissors") {
-        if (computerChoice === "paper") {
-            roundWin(humanChoice, computerChoice);
-        } else if (computerChoice === "rock") {
-            roundLoss(humanChoice, computerChoice);
-        }
+    }
+
+    function roundWin(humanChoice, computerChoice) {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        console.log(`Current scores are: You: ${++humanScore} Computer: ${computerScore}`);
+    }
+    
+    function roundLoss(humanChoice, computerChoice) {
+        console.log(`You lose :( ${computerChoice} beats ${humanChoice}`);
+        console.log(`Current scores are: You: ${humanScore} Computer: ${++computerScore}`);
     }
 }
 
-function roundWin(humanChoice, computerChoice) {
-    console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-    console.log(`Current scores are: You: ${++humanScore} Computer: ${computerScore}`);
-}
 
-function roundLoss(humanChoice, computerChoice) {
-    console.log(`You lose :( ${computerChoice} beats ${humanChoice}`);
-    console.log(`Current scores are: You: ${humanScore} Computer: ${++computerScore}`);
-}
 
 function getComputerChoice() {
     //generate a random number between 0 and 2 and assign it to the choice variable
