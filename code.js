@@ -28,11 +28,10 @@ function playGame() {
         if (humanChoice === computerChoice) {
             console.log("Tie!");
             console.log(`Current scores are: You: ${humanScore} Computer: ${computerScore}`);
-            return;
         }
     
-        //check to see who won
-        if (humanChoice === "rock") {
+        //check to see who won if it's not a tie
+        else if (humanChoice === "rock") {
             if (computerChoice === "scissors") {
                 roundWin(humanChoice, computerChoice);
             } else if (computerChoice === "paper") {
@@ -53,11 +52,13 @@ function playGame() {
         }
     }
 
+    //helper function to handle printing scores at the end of a round on win
     function roundWin(humanChoice, computerChoice) {
         console.log(`You win! ${humanChoice} beats ${computerChoice}`);
         console.log(`Current scores are: You: ${++humanScore} Computer: ${computerScore}`);
     }
     
+    //helper function to handle printing scores at the end of a round on loss
     function roundLoss(humanChoice, computerChoice) {
         console.log(`You lose :( ${computerChoice} beats ${humanChoice}`);
         console.log(`Current scores are: You: ${humanScore} Computer: ${++computerScore}`);
